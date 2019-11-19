@@ -146,6 +146,7 @@ mpd_send_idle_mask(struct mpd_connection *connection, enum mpd_idle mask)
 {
 	/* this buffer is large enough even for the full mask */
 	char buffer[128] = "idle";
+	size_t length = strlen(buffer);
 
 	assert(mask != 0);
 
@@ -153,8 +154,17 @@ mpd_send_idle_mask(struct mpd_connection *connection, enum mpd_idle mask)
 		return false;
 
 	for (unsigned i = 0; idle_names[i] != NULL; ++i) {
+		const size_t i_length = strlen(idle_names[i]);
+
 		if (mask & (1 << i)) {
 			mask &= ~(1 << i);
+			if (i_length + length + 2 > sizeof(buffer)) {
+				mpd_error_code(&connection->error,
+					       MPD_ERROR_ARGUMENT);
+				mpd_error_message(&connection->error,
+						  "idle list is too long");
+				return false;
+			}
 			strcat(buffer, " ");
 			strcat(buffer, idle_names[i]);
 		}
