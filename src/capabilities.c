@@ -72,14 +72,14 @@ mpd_send_tag_types_v(struct mpd_connection *connection,
 	if (mpd_error_is_defined(&connection->error))
 		return false;
 
-	char buffer[1024] = "tagtypes ";
+	char buffer[512] = "tagtypes ";
 	strcat(buffer, sub_command);
 	size_t length = strlen(buffer);
 
 	for (unsigned i = 0; i < n; ++i) {
 		const char *t = mpd_tag_name(types[i]);
 		assert(t != NULL);
-		size_t t_length = strlen(t);
+		const size_t t_length = strlen(t);
 
 		if (length + 1 + t_length + 1 > sizeof(buffer)) {
 			mpd_error_code(&connection->error, MPD_ERROR_ARGUMENT);
