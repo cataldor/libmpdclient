@@ -41,6 +41,13 @@
  *                                            #MPD_TAG_GROUPING,
  *                                            #MPD_TAG_WORK,
  *                                            #MPD_TAG_CONDUCTOR.
+ * @since libmpdclient 2.19 added support for #MPD_TAG_REPLAYGAIN_REFERENCE_LOUDNESS,
+ *					      #MPD_TAG_REPLAYGAIN_ALBUM_GAIN,
+ *					      #MPD_TAG_REPLAYGAIN_ALBUM_PEAK,
+ *					      #MPD_TAG_REPLAYGAIN_ALBUM_RANGE,
+ * 					      #MPD_TAG_REPLAYGAIN_TRACK_GAIN,
+ * 					      #MPD_TAG_REPLAYGAIN_TRACK_PEAK.
+ * 					      #MPD_TAG_REPLAYGAIN_TRACK_RANGE,
  */
 enum mpd_tag_type
 {
@@ -81,6 +88,14 @@ enum mpd_tag_type
 	MPD_TAG_GROUPING,
 	MPD_TAG_WORK,
 	MPD_TAG_CONDUCTOR,
+
+	MPD_TAG_REPLAYGAIN_REFERENCE_LOUDNESS,
+	MPD_TAG_REPLAYGAIN_ALBUM_GAIN,
+	MPD_TAG_REPLAYGAIN_ALBUM_PEAK,
+	MPD_TAG_REPLAYGAIN_ALBUM_RANGE,
+	MPD_TAG_REPLAYGAIN_TRACK_GAIN,
+	MPD_TAG_REPLAYGAIN_TRACK_PEAK,
+	MPD_TAG_REPLAYGAIN_TRACK_RANGE,
 
 	/* IMPORTANT: the ordering of tag types above must be
 	   retained, or else the libmpdclient ABI breaks */
